@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GunPickup : Pickup
 {
-    public override void OnPicked()
+    public override void OnPickup()
     {
-        base.OnPicked();
+        base.OnPickup();
 
         //TO DO: Add gun to player here
     }

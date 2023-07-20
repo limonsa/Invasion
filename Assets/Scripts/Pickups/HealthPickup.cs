@@ -4,25 +4,34 @@ using UnityEngine;
 
 public class HealthPickup : Pickup, IDamageable
 {
-    [SerializeField] public int healthMin;
-    [SerializeField] public int healthMax;
+    [SerializeField] private int healthMin;
+    [SerializeField] private int healthMax;
 
-    public override void OnPicked()
+    public override void OnPickup()
     {
-        base.OnPicked();
+        base.OnPickup();
 
-        //TO DO: Increase Health Here
         float health = Random.Range(healthMin, healthMax);
 
         var player = GameManager.GetInstance().GetPlayer();
 
         player.health.AddHealth(health);
 
-        Debug.Log($"Added {health} to Player");
+        //Debug.Log($"Added {health} to Player");
     }
 
     public void GetDamage(float damage)
     {
-        OnPicked();
+        OnPickup();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Debug.Log($"PICKUP SAYS >>> {collision.gameObject.name} detected collision with {collision.otherCollider.gameObject.name}");
+        if (collision.gameObject.name.Contains("Player"))
+        {
+            //Debug.Log($"NUKE.OnCollisionEnter2D() SAYS >>> {collision.gameObject.name} detected collision with {collision.otherCollider.gameObject.name}");
+            OnPickup();
+        }
     }
 }

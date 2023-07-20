@@ -30,6 +30,7 @@ public class Enemy : PlayableObject
         if (target != null)
         {
             Move(target.position);
+            Debug.LogWarning($"ENEMY.update() says: Following {target.name}");
         }
         else
         {
@@ -80,15 +81,11 @@ public class Enemy : PlayableObject
 
     public override void GetDamage(float damage)
     {
-        Debug.Log("Enemy Damaged!");
+        //Debug.Log("Enemy Damaged!");
         health.DeductHealth(damage);
         if (health.GetHealth() <= 0)
         {
             Die();
         }
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
 }
